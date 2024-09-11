@@ -12,4 +12,4 @@ function CoverArt({cover}: CoverArtProps) {
   )
 }
 
-export default CoverArt
+export default CoverArt;
