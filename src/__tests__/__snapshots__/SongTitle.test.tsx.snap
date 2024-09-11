@@ -42,3 +42,16 @@ exports[`volume control renders correctly 1`] = `
   </div>
 </div>
 `;
+
+exports[`volume control renders correctly w/ 1`] = `
+<div>
+  <div>
+    <h1
+      class="font-bold text-xl text-primary"
+    />
+    <p
+      class="text-secondary"
+    />
+  </div>
+</div>
+`;

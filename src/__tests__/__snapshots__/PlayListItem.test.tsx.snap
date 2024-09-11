@@ -3,19 +3,25 @@
 exports[`volume control renders correctly w/ 1`] = `
 <div>
   <div
-    class="flex w-full items-center justify-between undefined rounded-lg"
+    class="flex w-full items-center justify-between bg-secondary-light rounded-lg"
   >
     <div>
       <p
         class="text-primary font-medium"
-      />
+      >
+        Daily Routine
+      </p>
       <p
         class="text-secondary font-medium"
-      />
+      >
+        Animal Collective
+      </p>
     </div>
     <p
       class="text-secondary font-medium"
-    />
+    >
+      5:47
+    </p>
   </div>
 </div>
 `;
