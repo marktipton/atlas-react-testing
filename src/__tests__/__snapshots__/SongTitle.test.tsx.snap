@@ -1,5 +1,35 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`renders SongTitle component with empty artist and title 1`] = `
+<div>
+  <div>
+    <h1
+      class="font-bold text-xl text-primary"
+    />
+    <p
+      class="text-secondary"
+    />
+  </div>
+</div>
+`;
+
+exports[`renders songtitle component w/ given title and artist 1`] = `
+<div>
+  <div>
+    <h1
+      class="font-bold text-xl text-primary"
+    >
+      Sandstorm
+    </h1>
+    <p
+      class="text-secondary"
+    >
+      Darude
+    </p>
+  </div>
+</div>
+`;
+
 exports[`volume control renders correctly 1`] = `
 <div>
   <div>
