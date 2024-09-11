@@ -1,0 +1,21 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`volume control renders correctly w/ 1`] = `
+<div>
+  <div
+    class="flex w-full items-center justify-between undefined rounded-lg"
+  >
+    <div>
+      <p
+        class="text-primary font-medium"
+      />
+      <p
+        class="text-secondary font-medium"
+      />
+    </div>
+    <p
+      class="text-secondary font-medium"
+    />
+  </div>
+</div>
+`;

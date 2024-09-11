@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { expect, test } from "vitest";
 import  SongTitle  from "../components/SongTitle";
 
-test("volume control renders correctly", () => {
+test("volume control renders correctly w/", () => {
   const { container } = render(<SongTitle />);
   expect(container).toMatchSnapshot();
 });
