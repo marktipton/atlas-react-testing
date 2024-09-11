@@ -1,4 +1,4 @@
-# Atlas Typescript Intro
+# Atlas React Testing
 
 ## Getting Started
 
