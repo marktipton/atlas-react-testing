@@ -1,7 +1,7 @@
-import { render, screen, fireEvent } from "@testing-library/react";
-import { expect, test, vi } from "vitest";
+import { render, screen } from "@testing-library/react";
+import { expect, test, vi, beforeEach } from "vitest";
 import MusicPlayer from "../MusicPlayer";
-import { PlaylistItem } from "../hooks/usePlaylistData";
+import { PlaylistItem, usePlaylistData } from "../hooks/usePlaylistData";
 import '@testing-library/jest-dom/vitest';
 
 // Example playlist data
@@ -11,43 +11,45 @@ const playlistData: PlaylistItem[] = [
   { id: 3, title: 'Sphynx', artist: 'La Femme', genre: 'Psychedelic Pop', duration: '5:43', cover: 'MystereCover.jpg' },
 ];
 
-// Mock the usePlaylistData hook to return the playlist data
 vi.mock('../hooks/usePlaylistData', () => ({
-  usePlaylistData: vi.fn(() => ({
-    data: playlistData,
-    loading: false,
-  })),
+  usePlaylistData: vi.fn(),
 }));
 
+beforeEach(() => {
+  vi.resetAllMocks();  // Reset all mocks before each test
+});
+
 test("MusicPlayer shows the first song by default", () => {
-  // Render the MusicPlayer without passing props, as we are using the mocked hook
+  (usePlaylistData as vi.Mock).mockReturnValue({
+    data: playlistData,
+    loading: false,
+  });
   render(<MusicPlayer />);
 
-  // Check that the first song is displayed
+
   const coverImage = screen.getByAltText('b2b Cover');
   expect(coverImage).toBeInTheDocument();
   expect(coverImage).toHaveAttribute('src', 'bratCover.png');
 });
 
-// test("MusicPlayer plays the next song when the Next button is clicked", () => {
-//   // Render the MusicPlayer
-//   render(<MusicPlayer />);
 
-//   // Simulate the user clicking the Next button
-//   const nextButton = screen.getByRole("button", { name: /next/i });
-//   fireEvent.click(nextButton);
+test("MusicPlayer shows a loading screen when the playlist is loading", () => {
 
-//   // Check that the second song is now playing
-//   const coverImage = screen.getByAltText('One Last Breath Cover');
-//   expect(coverImage).toBeInTheDocument();
-//   expect(coverImage).toHaveAttribute('src', 'creedCover.png');
-// });
+  (usePlaylistData as vi.Mock).mockReturnValue({
+    data: playlistData,
+    loading: true,
+  });
 
-// test("MusicPlayer disables the Previous button when on the first song", () => {
-//   // Render the MusicPlayer
-//   render(<MusicPlayer />);
+  vi.mock('../hooks/usePlaylistData', () => ({
+    usePlaylistData: vi.fn(() => ({
+      data: playlistData,
+      loading: true,
+    })),
+  }));
 
-//   // The Previous button should be disabled when on the first song
-//   const prevButton = screen.getByRole("button", { name: /prev/i });
-//   expect(prevButton).toBeDisabled();
-// });
+  render(<MusicPlayer />);
+
+
+  const loadingMessage = screen.getByText(/loading.../i);  // Match the loading text (case insensitive)
+  expect(loadingMessage).toBeInTheDocument();
+});
