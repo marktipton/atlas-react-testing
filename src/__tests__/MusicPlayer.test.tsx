@@ -8,6 +8,9 @@ const playlistData: PlaylistItem[] = [
   { id: 1, title: 'b2b', artist: 'Charli XCX', genre: 'Hyperpop', duration: '2:58', cover: 'bratCover.png' },
   { id: 2, title: 'One Last Breath', artist: 'Creed', genre: 'Butt Rock', duration: '3:58', cover: 'creedCover.png' },
   { id: 3, title: 'Sphynx', artist: 'La Femme', genre: 'Psychedelic Pop', duration: '5:43', cover: 'MystereCover.jpg' },
+  { id: 4, title: 'Pyramids', artist: 'Frank Ocean', genre: 'R&B', duration: '9:52', cover: 'ChannelOrangeCover.png' },
+  { id: 5, title: 'Echoes', artist: 'Pink Floyd', genre: 'Rock', duration: '23:32', cover: 'PinkFloydCover.png' },
+  { id: 6, title: 'Run From Me', artist: 'Timber Timbre', genre: 'Rock', duration: '4:16', cover: 'TimberTimbreCover.png' },
 ];
 
 vi.mock('../hooks/usePlaylistData', () => ({
@@ -101,4 +104,31 @@ test("MusicPlayer switches to the previous song", async () => {
   coverImage = await screen.findByAltText("b2b Cover");
   expect(coverImage).toBeInTheDocument();
   expect(coverImage).toHaveAttribute('src', 'bratCover.png');
+});
+
+test("MusicPlayer shuffles to a random song", async () => {
+  (usePlaylistData as vi.Mock).mockReturnValue({
+    data: playlistData,
+    loading: false,
+  });
+
+  render(<MusicPlayer />);
+
+  // Assume the player starts with the first song
+  const initialCoverImage = screen.getByAltText('b2b Cover');
+  expect(initialCoverImage).toBeInTheDocument();
+
+  // Click the "Shuffle" button to play a random song
+  const shuffleButton = screen.getByRole('button', { name: /shuffle/i });
+  expect(shuffleButton).toBeInTheDocument();
+  shuffleButton.click();
+
+  const nextButton = screen.getByRole('button', { name: /next/i });
+  nextButton.click();
+
+  // Ensure a different song cover is displayed after shuffling and clicking next
+  const shuffledCoverImage = await screen.findByAltText(/Cover/i);
+
+  expect(shuffledCoverImage).toBeInTheDocument();
+  expect(shuffledCoverImage).not.toHaveAttribute('src', 'bratCover.png'); // It should not be the same as the first song
 });
