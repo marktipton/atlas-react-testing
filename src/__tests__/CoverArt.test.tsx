@@ -8,10 +8,8 @@ test("CoverArt renders correctly", () => {
 
   const { container } = render(<CoverArt cover={cover} title={title} />);
 
-  // Snapshot test
   expect(container).toMatchSnapshot();
 
-  // Additional assertions
   const imgElement = screen.getByAltText(`${title} Cover`);
   expect(imgElement).toBeInTheDocument();
   expect(imgElement).toHaveAttribute('src', cover);

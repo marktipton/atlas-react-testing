@@ -2,11 +2,6 @@ import { render, screen } from "@testing-library/react";
 import { expect, test } from "vitest";
 import  SongTitle  from "../components/SongTitle";
 
-// test("volume control renders correctly w/", () => {
-//   const { container } = render(<SongTitle />);
-//   expect(container).toMatchSnapshot();
-// });
-
 test("renders songtitle component w/ given title and artist", () => {
   const { container } = render(<SongTitle title="Sandstorm" artist="Darude"/>);
   expect(container).toMatchSnapshot();
