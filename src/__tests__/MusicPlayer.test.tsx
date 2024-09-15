@@ -18,6 +18,7 @@ beforeEach(() => {
   vi.resetAllMocks();  // Reset all mocks before each test
 });
 
+// test load first song........................................................
 test("MusicPlayer shows the first song by default", () => {
   (usePlaylistData as vi.Mock).mockReturnValue({
     data: playlistData,
@@ -31,7 +32,7 @@ test("MusicPlayer shows the first song by default", () => {
   expect(coverImage).toHaveAttribute('src', 'bratCover.png');
 });
 
-
+// Test loading................................................................
 test("MusicPlayer shows a loading screen when the playlist is loading", () => {
 
   (usePlaylistData as vi.Mock).mockReturnValue({
@@ -52,6 +53,7 @@ test("MusicPlayer shows a loading screen when the playlist is loading", () => {
   expect(loadingMessage).toBeInTheDocument();
 });
 
+// Test next button............................................................
 test("MusicPlayer switches to the next song", async () => {
   (usePlaylistData as vi.Mock).mockReturnValue({
     data: playlistData,
@@ -71,4 +73,32 @@ test("MusicPlayer switches to the next song", async () => {
   const coverImage = await screen.findByAltText("One Last Breath Cover");
   expect(coverImage).toBeInTheDocument();
   expect(coverImage).toHaveAttribute('src', 'creedCover.png');  // Verify correct image
+});
+
+// test previous button.......................................................
+test("MusicPlayer switches to the previous song", async () => {
+  (usePlaylistData as vi.Mock).mockReturnValue({
+    data: playlistData,
+    loading: false,
+  });
+
+  render(<MusicPlayer />);
+  // Go to next song first
+  const nextButton = screen.getByRole('button', { name: /next/i });
+  nextButton.click();
+
+  // Wait for the second song's cover to load
+  let coverImage = await screen.findByAltText("One Last Breath Cover");
+  expect(coverImage).toBeInTheDocument();
+  expect(coverImage).toHaveAttribute('src', 'creedCover.png');
+
+  // click previous button to go back to first song
+  const prevButton = screen.getByRole('button', { name: /previous/i });
+  expect(prevButton).toBeInTheDocument();
+  prevButton.click();
+
+  // Wait for the first song's cover to load again
+  coverImage = await screen.findByAltText("b2b Cover");
+  expect(coverImage).toBeInTheDocument();
+  expect(coverImage).toHaveAttribute('src', 'bratCover.png');
 });
