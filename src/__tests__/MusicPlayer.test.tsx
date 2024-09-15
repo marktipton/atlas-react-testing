@@ -1,7 +1,22 @@
+import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import { expect, test, vitest  } from "vitest";
 import MusicPlayer from "../MusicPlayer";
 import  { usePlaylistData } from "../hooks/usePlaylistData";
+
+type PlaylistItem = {
+  id: number;
+  title: string;
+  artist: string;
+  genre: string;
+  duration: string;
+  cover: string;
+};
+
+type UsePlaylistDataReturn = {
+  data: PlaylistItem[];
+  loading: boolean;
+};
 
 vitest.mock('../hooks/usePlaylistData', () => ({
   usePlaylistData: vitest.fn(),
@@ -14,7 +29,10 @@ test("Next button grabs next song", () => {
     { id: 3, title: "Sphynx", artist: "La Femme", genre: "psychedelic pop", duration: "5:43", cover: "MystereCover.jpg"},
   ];
 
-  usePlaylistData.mockReturnValue({ data: mockPlaylist, loading: false});
+  (usePlaylistData as vitest.Mock).mockReturnValue({
+    data: mockPlaylist,
+    loading: false,
+  });
 
   render(<MusicPlayer />);
 

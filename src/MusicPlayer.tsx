@@ -17,7 +17,7 @@ export default function MusicPlayer() {
   const [currentSong, setCurrentSong] = useState<PlaylistItem | null>(null);
   const [currentSongIndex, setCurrentSongIndex] = useState<number>(0);
   const [isShuffled, setIsShuffled] = useState<boolean>(false);
-  const [playedSongs, setPlayedSongs] = useState<number[]>([]); // keep track of played songs for shuffle mode
+  const [playedSongs, setPlayedSongs] = useState<number[]>([]);
 
   // Set first song after the page loads
   if (!currentSong && playlist.length > 0) {
