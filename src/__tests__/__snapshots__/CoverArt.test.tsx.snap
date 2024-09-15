@@ -4,7 +4,7 @@ exports[`CoverArt renders correctly 1`] = `
 <div>
   <div>
     <img
-      alt="CoverArt"
+      alt="Album Title Cover"
       class="rounded-lg w-full h-auto"
       src="https://raw.githubusercontent.com/atlas-jswank/atlas-music-player-api/main/images/albumn6.webp"
     />

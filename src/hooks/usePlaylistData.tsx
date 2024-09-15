@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-type PlaylistItem = {
+export type PlaylistItem = {
   id: number;
   title: string;
   artist: string;

@@ -1,8 +1,8 @@
 import "@testing-library/jest-dom/vitest";
-
-import { afterAll, beforeAll } from "vitest";
+import '@testing-library/jest-dom';
+import { afterAll, beforeAll, afterEach } from "vitest";
 import { server } from "./mocks";
-import { afterEach } from "node:test";
+// import { afterEach } from "node:test";
 
 
 beforeAll(() => {
