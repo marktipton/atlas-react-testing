@@ -95,7 +95,7 @@ test("MusicPlayer switches to the previous song", async () => {
   expect(coverImage).toBeInTheDocument();
   expect(coverImage).toHaveAttribute('src', 'creedCover.png');
 
-  // click previous button to go back to first song
+  // click previous button to go back to first song (find using aria-label)
   const prevButton = screen.getByRole('button', { name: /previous/i });
   expect(prevButton).toBeInTheDocument();
   prevButton.click();
