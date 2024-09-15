@@ -27,7 +27,7 @@ function CurrentlyPlaying({ currentSong, onNextSong, onPrevSong, isPrevDisabled,
 
   return (
     <div className='flex flex-col justify-between p-6 md:w-1/2'>
-      <CoverArt cover={currentSong.cover}/>
+      <CoverArt cover={currentSong.cover} title={currentSong.title}/>
       <SongTitle title={currentSong.title} artist={currentSong.artist}/>
       <PlayControls
         onNextSong={onNextSong}

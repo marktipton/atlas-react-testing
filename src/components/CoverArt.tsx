@@ -2,12 +2,13 @@ import React from 'react'
 
 type CoverArtProps = {
   cover: string;
+  title: string;
 };
 
-function CoverArt({cover}: CoverArtProps) {
+function CoverArt({cover, title}: CoverArtProps) {
   return (
     <div>
-      <img src={cover} alt="CoverArt" className='rounded-lg w-full h-auto'/>
+      <img src={cover} alt={`${title} Cover`} className='rounded-lg w-full h-auto'/>
     </div>
   )
 }

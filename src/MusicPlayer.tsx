@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import CurrentlyPlaying from './components/CurrentlyPlaying';
 import Playlist from './components/Playlist';
 import { usePlaylistData } from './hooks/usePlaylistData';
