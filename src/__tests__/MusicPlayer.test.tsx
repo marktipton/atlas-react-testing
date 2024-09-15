@@ -65,7 +65,7 @@ test("MusicPlayer switches to the next song", async () => {
 
   render(<MusicPlayer />);
 
-  // Assume there is a button with the text 'Next' to skip to the next song
+  // utilize aria-label to get the next button
   const nextButton = screen.getByRole('button', { name: /next/i });
   expect(nextButton).toBeInTheDocument();
 
@@ -106,6 +106,7 @@ test("MusicPlayer switches to the previous song", async () => {
   expect(coverImage).toHaveAttribute('src', 'bratCover.png');
 });
 
+// Test music player shuffle mode with next button
 test("MusicPlayer shuffles to a random song", async () => {
   (usePlaylistData as vi.Mock).mockReturnValue({
     data: playlistData,
@@ -114,15 +115,15 @@ test("MusicPlayer shuffles to a random song", async () => {
 
   render(<MusicPlayer />);
 
-  // Assume the player starts with the first song
   const initialCoverImage = screen.getByAltText('b2b Cover');
   expect(initialCoverImage).toBeInTheDocument();
 
-  // Click the "Shuffle" button to play a random song
+  // Click the "Shuffle" button to toggle to shuffle mode
   const shuffleButton = screen.getByRole('button', { name: /shuffle/i });
   expect(shuffleButton).toBeInTheDocument();
   shuffleButton.click();
 
+  // click next to get random song from playlist
   const nextButton = screen.getByRole('button', { name: /next/i });
   nextButton.click();
 
